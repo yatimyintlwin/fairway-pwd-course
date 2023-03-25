@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript Exercise 1</title>
+  </head>
+  <body>
+    <p>Lorem ipsum dolor sit amet.</p>
+    <button>Button</button>
+
+    <script>
+      function hello() {
+        var p = document.querySelector("p");
+        p.textContent = "Hello JavaScript";
+        p.style.background = "cyan";
+        p.style.border = "5px solid black";
+        p.style.padding = "20px";
+      }
+
+      document.querySelector("button").onclick = hello;
+    </script>
+  </body>
+</html>
