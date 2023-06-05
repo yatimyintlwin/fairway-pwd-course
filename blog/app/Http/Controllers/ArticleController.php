@@ -2,17 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
     public function index()
     {
-        $data = [
-            ["title" => "Title One"],
-            ["title" => "Title 222"],
-            ["title" => "Title 333"],
-        ];
+        $data = Article::latest()->paginate(5);
 
         return view("articles.index", [
             "articles" => $data
@@ -21,6 +18,10 @@ class ArticleController extends Controller
 
     public function detail($id)
     {
-        return "Article Controller Detail -$id";
+        $article = Article::find($id);
+
+        return view("articles.detail", [
+            "article" => $article
+        ]);
     }
 }
