@@ -24,8 +24,11 @@
             <div class="mb-2">
                 <label>Category</label>
                 <select name="category_id" class="form-select">
-                    <option value="1">News</option>
-                    <option value="2">Tech</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}">
+                            {{ $category->name }}
+                        </option>
+                    @endforeach
                 </select>
             </div>
             <button class="btn btn-primary">add Article</button>

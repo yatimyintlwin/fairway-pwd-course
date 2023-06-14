@@ -16,7 +16,9 @@
                 <div class="card-body">
                     <h3 class="card-title h4">{{ $article->title }}</h3>
                     <div class="text-muted" style="font-size: 0.8em">
-                        {{ $article->created_at->diffForHumans() }}
+                        {{ $article->created_at->diffForHumans() }},
+                        Category: <b>{{ $article->category->name }}</b>
+                        {{ count($article->comments) }} Comments
                     </div>
                     <div class="mb-2">
                         {{$article->body}}
