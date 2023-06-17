@@ -1,9 +1,9 @@
-@extends("layouts.app")
+@extends('layouts.app')
 
-@section("content")
+@section('content')
     <div class="container" style="max-width: 800px">
 
-        @if($errors->any())
+        @if ($errors->any())
             <div class="alert alert-warning">
                 @foreach ($errors->all() as $err)
                     {{ $err }}
@@ -11,9 +11,9 @@
             </div>
         @endif
 
-        @if(session('info'))
+        @if (session('info'))
             <div class="alert alert-info">
-                {{session('info')}}
+                {{ session('info') }}
             </div>
         @endif
 
@@ -25,34 +25,36 @@
                     Category: <b>{{ $article->category->name }}</b>
                 </div>
                 <div class="mb-2">
-                    {{$article->body}}
+                    {{ $article->body }}
                 </div>
 
-                 <a href="{{ url("/articles/delete/$article->id")}}" class="btn btn-sm btn-danger">Delete</a>
-                </div>
+                <a href="{{ url("/articles/delete/$article->id") }}" class="btn btn-sm btn-danger">Delete</a>
+
+                <a href="{{ url("/articles/edit/$article->id") }}" class="btn btn-sm btn-primary">Edit</a>
             </div>
+        </div>
 
-            <ul class="list-group">
-                <li class="list-group-item active">
-                    Comments
-                    <span class="badge bg-dark">
-                        {{ count($article->comments) }}
-                    </span>
+        <ul class="list-group">
+            <li class="list-group-item active">
+                Comments
+                <span class="badge bg-dark">
+                    {{ count($article->comments) }}
+                </span>
+            </li>
+            @foreach ($article->comments as $comment)
+                <li class="list-group-item">
+                    <a href="{{ url("/comments/delete/$comment->id") }}" class="btn-close float-end"></a>
+
+                    {{ $comment->content }}
                 </li>
-                @foreach ($article->comments as $comment)
-                    <li class="list-group-item">
-                        <a href="{{ url("/comments/delete/$comment->id") }}" class="btn-close float-end"></a>
+            @endforeach
+        </ul><br>
 
-                        {{ $comment->content }}
-                    </li>
-                @endforeach
-            </ul><br>
-
-            <form action="{{ url("/comments/add") }}" method="post">
-                @csrf
-                <input type="hidden" name="article_id" value="{{ $article->id }}">
-                <textarea name="content" class="form-control mb-2" placeholder="New Comment"></textarea>
-                <button class="btn btn-secondary">Add Comment</button>
-            </form>
+        <form action="{{ url('/comments/add') }}" method="post">
+            @csrf
+            <input type="hidden" name="article_id" value="{{ $article->id }}">
+            <textarea name="content" class="form-control mb-2" placeholder="New Comment"></textarea>
+            <button class="btn btn-secondary">Add Comment</button>
+        </form>
     </div>
 @endsection
