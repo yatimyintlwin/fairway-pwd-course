@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Category Client</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/all.min.css" />
+    <script src="js/bootstrap.bundle.min.js" defer></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-dark bg-primary mb-4">
+      <div class="container" style="max-width: 800px">
+        <a href="#" class="navbar-brand">Category Client</a>
+      </div>
+    </nav>
+
+    <div class="container" style="max-width: 800px">
+      <div class="input-group mb-4">
+        <input type="text" class="form-control" />
+        <button class="btn btn-primary"><i class="fa-solid fa-add"></i></button>
+      </div>
+      <ul class="list-group" id="list"></ul>
+    </div>
+
+    <script>
+      const api = "http://localhost:8000/api";
+
+      fetch(`${api}/categories`)
+        .then((res) => res.json())
+        .then((data) => {
+          data.map((item) => createItem(item));
+        });
+
+      function createItem(item) {
+        let li = document.createElement("li");
+        li.classList.add("list-group-item");
+
+        let name = document.createElement("span");
+        name.textContent = item.name;
+
+        li.appendChild(name);
+
+        document.querySelector("#list").appendChild(li);
+      }
+    </script>
+  </body>
+</html>
